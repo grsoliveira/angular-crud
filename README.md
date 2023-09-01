@@ -14,3 +14,17 @@ Incluindo o mesmo através do seletor
 ```
 <app-cabecalho></app-cabecalho>
 ```
+
+## Property Binding
+
+Para o formulário do angular fazer o binding com o controlador (component.ts) é necessário utilizar a notação com colchetes
+
+Para o caso do componente HTML possuir a propriedade value, pode-se utilizar a sintaxe:
+```
+[value]="pensamento.conteudo"
+```
+
+Para o caso do componente HTML não possuir a propriedade value, pode-se utilizar a sintaxe:
+```
+{{ pensamento.conteudo }}
+```
