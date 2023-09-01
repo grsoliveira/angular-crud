@@ -28,3 +28,10 @@ Para o caso do componente HTML não possuir a propriedade value, pode-se utiliza
 ```
 {{ pensamento.conteudo }}
 ```
+
+## Event Binding
+
+Usamos a sintaxe de event binding
+```
+(evento)="metodo()"
+```
