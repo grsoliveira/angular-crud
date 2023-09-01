@@ -24,7 +24,7 @@ Para o caso do componente HTML possuir a propriedade value, pode-se utilizar a s
 [value]="pensamento.conteudo"
 ```
 
-Para o caso do componente HTML não possuir a propriedade value, pode-se utilizar a sintaxe:
+Para o caso do componente HTML não possuir a propriedade value, pode-se utilizar a sintaxe (chamada de interpolação):
 ```
 {{ pensamento.conteudo }}
 ```
