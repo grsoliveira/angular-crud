@@ -35,3 +35,12 @@ Usamos a sintaxe de event binding
 ```
 (evento)="metodo()"
 ```
+
+## Diretiva
+
+Utilizamos a diretiva (de atributo) ngModel para criar um fluxo de mão dupla dos dados (two way data-binding)
+```
+[(ngModel)]="pensamento.conteudo"
+```
+
+É necessário importar o FormsModule no app.module.ts para o funcionamento ocorrer corretamente.
