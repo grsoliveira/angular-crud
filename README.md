@@ -44,3 +44,48 @@ Utilizamos a diretiva (de atributo) ngModel para criar um fluxo de mão dupla do
 ```
 
 É necessário importar o FormsModule no app.module.ts para o funcionamento ocorrer corretamente.
+
+
+## Rotas
+
+Criando o arquivo de rotas do Angular 
+Sempre que definimos um path para '', precisamos definir a propriedade pathMatch.
+
+```
+import { NgModule } from "@angular/core";
+import {Router, RouterModule, Routes} from "@angular/router";
+import {CriarPensamentoComponent} from "./componentes/pensamentos/criar-pensamento/criar-pensamento.component";
+import {ListarPensamentoComponent} from "./componentes/pensamentos/listar-pensamento/listar-pensamento.component";
+
+const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'listarPensamento',
+    pathMatch: 'full'
+  },
+  {
+    path: 'criarPensamento',
+    component: CriarPensamentoComponent
+  },
+  {
+    path: 'listarPensamento',
+    component: ListarPensamentoComponent
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+```
+
+As demais rotas, apontam para os componentes do angular. 
+Nosso arquivo html inicial ficou da seguinte forma
+
+```
+<main>
+  <router-outlet></router-outlet>
+</main>
+```
+
