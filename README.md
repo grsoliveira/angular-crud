@@ -48,7 +48,8 @@ Utilizamos a diretiva (de atributo) ngModel para criar um fluxo de mão dupla do
 
 ## Rotas
 
-Criando o arquivo de rotas do Angular 
+Criando o arquivo de rotas do Angular (app-routing.module.ts)
+
 Sempre que definimos um path para '', precisamos definir a propriedade pathMatch.
 
 ```
@@ -81,11 +82,15 @@ export class AppRoutingModule { }
 ```
 
 As demais rotas, apontam para os componentes do angular. 
+
 Nosso arquivo html inicial ficou da seguinte forma
 
 ```
+<app-cabecalho></app-cabecalho>
 <main>
   <router-outlet></router-outlet>
 </main>
+<app-rodape></app-rodape>
+
 ```
 
