@@ -235,3 +235,23 @@ Em seguinda, vamos no package.json vamos realizar as seguintes alterações (sta
 ```
 
 O teste pode ser realizado executando npm start no terminal
+
+
+## Criando modelo de retorno da API (Interface)
+
+Precisamos garantir que o backend e o frontend falem seguindo a mesma estrutura de dados. 
+Para isso, criamos interfaces como modelos de dados. 
+A interface recebe EXPORT para que possa ser utilizada por outros componentes da aplicação.
+
+```
+export interface Pensamento {
+  id: number
+  conteudo: string
+  autoria: string
+  modelo: string
+}
+```
+
+Todas as variáveis, então, podem ser tipadas com esse novo formato Pensamento
+
+## 
