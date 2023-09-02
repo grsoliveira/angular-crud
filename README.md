@@ -436,3 +436,68 @@ Por fim, precisamos definir a correta chamada ao exlcuir, através de routerLink
       <img src="../../../../assets/imagens/icone-excluir.png" alt="Ícone de Excluir">
     </button>
 ```
+
+
+## Método de Editar
+
+Criação do comportamento no service
+
+```
+editar(pensamento: Pensamento): Observable<Pensamento> {
+    const URL = `${this.API}/${pensamento.id}`;
+    return this.http.put<Pensamento>(URL, pensamento);
+  }
+```
+
+Criamos um componente para tratar as demandas de edição
+
+Neste componente, adicionamos os comportamentos de editar e cancelar, chamando o service
+
+```
+pensamento: Pensamento = {
+    id: '',
+    conteudo: '',
+    autoria: '',
+    modelo: ''
+  }
+
+  constructor(private service: PensamentoService,
+              private router: Router,
+              private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.service.buscarPorId(parseInt(id!)).subscribe(pensamento => {
+      this.pensamento = pensamento;
+    })
+  }
+
+  editarPensamento() {
+    if (this.pensamento.id) {
+      this.service.editar(this.pensamento).subscribe(() => {
+        this.router.navigate(['/listarPensamento']);
+      })
+    }
+  }
+
+  cancelar() {
+    this.router.navigate(['/listarPensamento']);
+  }
+```
+
+Precisamos definir a rota para o novo componente de editar (app-routing.module.ts)
+
+```
+{
+    path: 'pensamentos/editarPensamento/:id',
+    component: EditarPensamentoComponent
+  }
+```
+
+Por fim, precisamos invocar corretamente a nova rota com o routerLink
+
+```
+    <button class="botao-editar" routerLink="/pensamentos/editarPensamento/{{pensamento.id}}">
+      <img src="../../../../assets/imagens/icone-editar.png" alt="Ícone de Editar">
+    </button>
+```
