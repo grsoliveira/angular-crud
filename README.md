@@ -184,3 +184,54 @@ larguraPensamento(): string {
   
 ```
 
+## Configurando o JSON Server
+
+Para acelerar o processo de teste e integração, podemos utilizar um backend 'fake' para responder as nossas requisições.
+Criando uma pasta Backend e rodando o seguinte commando, dentro da pasta, para criar o arquivo package.json
+
+```
+npm init -y
+```
+
+Em seguida, iremos instalar o json server
+
+```
+npm i json-server
+```
+
+Em seguida, vamos criar o arquivo db.json (contendo todos os endpoints da nossa aplicação)
+
+```
+{
+  "pensamentos": [
+    {
+      "id": 1,
+      "conteudo": "Que bom que você veio",
+      "autoria": "Gleibson",
+      "modelo": "modelo1"
+    },
+    {
+      "id": 2,
+      "conteudo": "Estudando Angular",
+      "autoria": "Dev Alura",
+      "modelo": "modelo2"
+    },
+    {
+      "id": 3,
+      "conteudo": "Angular é o melhor",
+      "autoria": "Gleibson",
+      "modelo": "modelo3"
+    }
+  ]
+}
+```
+
+Em seguinda, vamos no package.json vamos realizar as seguintes alterações (start)
+
+```
+  "scripts": {
+    "start": "json-server --watch db.json --port 3000"
+  },
+```
+
+O teste pode ser realizado executando npm start no terminal
