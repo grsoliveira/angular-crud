@@ -165,3 +165,22 @@ A implementação do else foi definida para exibir o template na tela
   </div>
 </ng-template>
 ```
+
+## Utilizando diretiva de mudança de estilo (ngClass)
+
+A diretiva ngClass é capaz de carregar/mudar a classe dos elementos de acordo com algumas condições.
+
+```
+<div class="pensamento {{ pensamento.modelo }} ff-roboto-mono" [ngClass]="larguraPensamento()" >
+
+...
+
+larguraPensamento(): string {
+  if (this.pensamento.conteudo.length >= 256) {
+    return 'pensamento-g';
+  }
+  return 'pensamento-p';
+}
+  
+```
+
