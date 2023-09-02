@@ -278,4 +278,62 @@ export class PensamentoService {
 Injectable significa que o serviço pode ser injetado em outros componentes do projeto.
 providedIn significa que o serviço pode ser utilizado por todas as partes da aplicação (já que foi definido o valor root)
 
+## Injeção de dependência
 
+No angular, a injeção de dependência é um padrão de projeto, logo, essa injeção vai ocorrer automaticamente uma vez que um componente 
+necessite de uma determinada instância. 
+
+Definimos um parâmetro como private no construtor, para que, automaticamente, esse se torne um atributo da classe em questão.
+
+```
+constructor(private http: HttpClient) { }
+```
+
+Lembrando que é necessário realizar a importação do HttpClientModule no app.module
+
+```
+  imports: [
+    BrowserModule,
+    FormsModule,
+    AppRoutingModule,
+    HttpClientModule
+  ],
+```
+
+## Construindo chamadas ao backend
+
+Inicialmente vamos definir o endereço da API (endereço exibido quando o json-server fica online).
+
+Vamos utilizar o método GET do Http para retornar a lista de Pensamentos.
+
+```
+private readonly API = 'http://localhost:3000/pensamentos';
+
+listar() {
+  return this.http.get<Pensamento[]>(this.API);
+}
+```
+
+## Observables
+
+Utilizados de forma interna no Angular, para obter dados e informações de forma constante. 
+
+Similar ao Promisses, o Observable oferece o mesmo recurso de observação, com o adicional de permitir uma troca constante de dados.
+
+Inicialmente, vamos tipar o retorno do método do service
+```
+listar(): Observable<Pensamento[]> {
+  return this.http.get<Pensamento[]>(this.API);
+}
+```
+
+Em seguida, precisamos tratar o retorno do uso desse método, subcrevendo no canal de comunicação.
+
+```
+listaPensamentos: Pensamento[] = [];
+
+
+this.service.listar().subscribe(listaPensamentos => {
+  this.listaPensamentos = listaPensamentos;
+});
+```
