@@ -254,4 +254,28 @@ export interface Pensamento {
 
 Todas as variáveis, então, podem ser tipadas com esse novo formato Pensamento
 
-## 
+## Criando Service
+
+Service são elementos que serão responsàveis pela comunicação entre o front end e o back end.
+
+Para criar um service, é necessário executar o comando (obedecendo o caminho correto)
+
+```
+ng g s componentes/pensamentos/pensamento
+
+...
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PensamentoService {
+
+  constructor() { }
+}
+
+```
+
+Injectable significa que o serviço pode ser injetado em outros componentes do projeto.
+providedIn significa que o serviço pode ser utilizado por todas as partes da aplicação (já que foi definido o valor root)
+
+
