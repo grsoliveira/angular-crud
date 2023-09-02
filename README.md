@@ -355,3 +355,84 @@ criarPensamento() {
   })
 }
 ```
+
+## Método de Excluir
+
+Criando um componente para ficar responsável pela exclusão
+
+Este componente será o modal que deve questionar se a exclusão deve mesmo ser realiada. 
+
+```
+<section class="container ff-inter excluir-pensamentos">
+  <div class="modal">
+    <p>O pensamento será deletado. <br /> Confirma a exclusão?</p>
+    <div class="acoes">
+      <button class="botao botao-excluir" (click)="excluirPensamento()">Excluir</button>
+      <button class="botao botao-cancelar" (click)="cancelar()">Cancelar</button>
+    </div>
+  </div>
+
+  <div class="overlay"></div>
+</section>
+
+```
+
+Precisaremos de alguns recursos para obter o ID do pensamento selecionado e direcionamento de rotas
+```
+  constructor(private service: PensamentoService,
+              private router: Router,
+              private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    this.service.buscarPorId(parseInt(id!)).subscribe(pensamento => {
+      this.pensamento = pensamento;
+    })
+  }
+
+  excluirPensamento() {
+    if (this.pensamento.id) {
+      this.service.excluir(this.pensamento.id).subscribe(() => {
+        this.router.navigate(['/listarPensamento'])
+      })
+    }
+  }
+
+  cancelar() {
+    this.router.navigate(['/listarPensamento']);
+  }
+```
+snapshot - obtem informações das rota no momento da invocação
+paramMap - traz um map das informações dos paramentors obrigatórios e opcionais daquela rota 
+
+
+Precisaremos também de um método auxiliar no service, para obter pensamentos por id
+
+```
+  excluir(id: number): Observable<Pensamento> {
+    const URL = `${this.API}/${id}`;
+    return this.http.delete<Pensamento>(URL);
+  }
+
+  buscarPorId(id: number): Observable<Pensamento> {
+    const URL = `${this.API}/${id}`;
+    return this.http.get<Pensamento>(URL);
+  }
+```
+
+Precisamos definir as rotas corretamente, no app-routing.module.ts
+
+```
+  {
+    path: 'pensamentos/excluirPensamento/:id',
+    component: ExcluirPensamentoComponent
+  }
+```
+
+Por fim, precisamos definir a correta chamada ao exlcuir, através de routerLinks
+
+```
+    <button class="botao-excluir" routerLink="/pensamentos/excluirPensamento/{{pensamento.id}}">
+      <img src="../../../../assets/imagens/icone-excluir.png" alt="Ícone de Excluir">
+    </button>
+```

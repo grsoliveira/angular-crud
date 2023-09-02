@@ -29,6 +29,6 @@ export class CriarPensamentoComponent implements OnInit {
   }
 
   cancelar() {
-    alert("Cancelar criar novo pensamento");
+    this.router.navigate(['/listarPensamento']);
   }
 }

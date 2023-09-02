@@ -19,4 +19,14 @@ export class PensamentoService {
   criar(pensamento: Pensamento): Observable<Pensamento> {
     return this.http.post<Pensamento>(this.API, pensamento);
   }
+
+  excluir(id: number): Observable<Pensamento> {
+    const URL = `${this.API}/${id}`;
+    return this.http.delete<Pensamento>(URL);
+  }
+
+  buscarPorId(id: number): Observable<Pensamento> {
+    const URL = `${this.API}/${id}`;
+    return this.http.get<Pensamento>(URL);
+  }
 }
