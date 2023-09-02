@@ -97,3 +97,12 @@ Nosso arquivo html inicial ficou da seguinte forma
 ## Diretiva - routerLink
 
 Inclusão da diretiva routerLink nos botões para direcionamento das telas da aplicação
+
+## Componentização
+
+Criação do primeiro componente - pensamento
+Utilizando o mesmo na página de listarPensamentos (inclusão da tag <app-pensamento></app-pensamento>)
+
+## Utilizando Diretivas estruturais (ngFor)
+
+Utilizando para repetir elementos HTML na interface
