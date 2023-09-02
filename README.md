@@ -337,3 +337,21 @@ this.service.listar().subscribe(listaPensamentos => {
   this.listaPensamentos = listaPensamentos;
 });
 ```
+
+## Método de Criar
+
+No serviço
+```
+criar(pensamento: Pensamento): Observable<Pensamento> {
+  return this.http.post<Pensamento>(this.API, pensamento);
+}
+```
+
+No componente
+```
+criarPensamento() {
+  this.service.criar(this.pensamento).subscribe(() => {
+    this.router.navigate(['/listarPensamento']);
+  })
+}
+```
