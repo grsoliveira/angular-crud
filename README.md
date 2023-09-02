@@ -106,3 +106,30 @@ Utilizando o mesmo na página de listarPensamentos (inclusão da tag <app-pensam
 ## Utilizando Diretivas estruturais (ngFor)
 
 Utilizando para repetir elementos HTML na interface
+
+```
+<div *ngFor="let pensamento of listaPensamentos">
+  <app-pensamento></app-pensamento>
+</div>
+```
+
+## Comunicação entre componentes
+
+A comunicação entre os componentes funciona através de inputs e outputs
+@Input() informa que a informação será recebida (enviada pelo componente pai)
+
+```
+@Input() pensamento = {
+  conteudo: 'I love Angular',
+  autoria: 'Gleibson Oliveira',
+  modelo: 'modelo3'
+}
+```
+
+O envio das informações é feito através do property binding ([pensamento]), conforme mostrado abaixo
+
+```
+<div *ngFor="let pensamento of listaPensamentos">
+  <app-pensamento [pensamento]="pensamento"></app-pensamento>
+</div>
+```
