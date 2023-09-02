@@ -94,3 +94,6 @@ Nosso arquivo html inicial ficou da seguinte forma
 
 ```
 
+## Diretiva - routerLink
+
+Inclusão da diretiva routerLink nos botões para direcionamento das telas da aplicação
