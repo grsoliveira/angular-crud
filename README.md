@@ -133,3 +133,35 @@ O envio das informações é feito através do property binding ([pensamento]), 
   <app-pensamento [pensamento]="pensamento"></app-pensamento>
 </div>
 ```
+
+## Utilizando Diretivas estruturais (ngIf)
+
+Utilizando para condicionar a exibição de elementos na tela
+
+```
+<div class="mural" *ngIf="listaPensamentos.length > 0">
+  <div *ngFor="let pensamento of listaPensamentos">
+    <app-pensamento [pensamento]="pensamento"></app-pensamento>
+  </div>
+</div>
+```
+
+## Componente ng-template
+
+O componente em questão não é renderizado por padrão pelo angular. Para isso, precisamos passar mais instruções. 
+
+A implementação do else foi definida para exibir o template na tela
+
+```
+<div class="mural" *ngIf="listaPensamentos.length > 0, else semPensamentos">
+  <div *ngFor="let pensamento of listaPensamentos">
+    <app-pensamento [pensamento]="pensamento"></app-pensamento>
+  </div>
+</div>
+
+<ng-template #semPensamentos>
+  <div class="ff-inter sem-pensamentos">
+    <p>Ainda não há pensamentos cadastrados!</p>
+  </div>
+</ng-template>
+```
