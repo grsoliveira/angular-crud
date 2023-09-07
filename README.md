@@ -501,3 +501,49 @@ Por fim, precisamos invocar corretamente a nova rota com o routerLink
       <img src="../../../../assets/imagens/icone-editar.png" alt="Ícone de Editar">
     </button>
 ```
+
+
+# Angular 14 (Evoluindo a Aplicação)
+
+## Utilizando FormBuilder
+
+Primeiro passo é importar a dependência ReactiveFormsModule em app.module.ts
+
+Com isso podemos: 
+
+1. Definir uma variável do tipo FormGroup
+```
+  formulario!: FormGroup;
+```
+
+2. Incluir uma nova injeção no construtor (FormBuilder)
+``` 
+  constructor(private service: PensamentoService,
+              private router: Router,
+              private formBuilder: FormBuilder) { }
+```
+
+3. Inicializar a variável formulário
+```
+  ngOnInit(): void {
+    this.formulario = this.formBuilder.group({
+      conteudo: ['Formulário reativo'],
+      autoria: [],
+      modelo: ['modelo1']
+    });
+  }
+```
+
+Lembrando que o formulário também pode ser criado utilizando a seguinte notação"
+```
+ngOnInit(): void {
+    this.formulario = new FormGroup({
+      conteudo: new FormControl(''),
+      autoria: new FormControl(''),
+      modelo: new FormControl('')
+    })
+  }
+```
+
+## Renderizando o formulário do FormBuilder
+
