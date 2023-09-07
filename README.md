@@ -567,12 +567,12 @@ Onde o nome apresentado deve ser o mesmo definido na construção do formBuilder
 As validações podem ser incluídas utilizando Validators
 ```
 ngOnInit(): void {
-    this.formulario = this.formBuilder.group({
-      conteudo: ['Formulário reativo', [Validators.required]],
-      autoria: ['Angular', [Validators.required]],
-      modelo: ['modelo1']
-    });
-  }
+  this.formulario = this.formBuilder.group({
+    conteudo: ['Formulário reativo', [Validators.required]],
+    autoria: ['Angular', [Validators.required]],
+    modelo: ['modelo1']
+  });
+}
 ```
 
 E a verificação do formulário pode ser realizada através do valid
@@ -585,18 +585,64 @@ if (this.formulario.valid) {
 Validações mais detalhadas podem ser feitas utilizando o compose. 
 A primeira delas, não permite caracteres em branco, a segunda delas não permite textos menores que 3 caracteres. 
 ```
-  ngOnInit(): void {
-    this.formulario = this.formBuilder.group({
-      conteudo: ['Formulário reativo', Validators.compose([
-        Validators.required,
-        Validators.pattern(/(.|s)*\S(.|\s)*/)
-        ])],
-      autoria: ['Angular', Validators.compose([
-        Validators.required,
-        Validators.minLength(3)
+ngOnInit(): void {
+  this.formulario = this.formBuilder.group({
+    conteudo: ['Formulário reativo', Validators.compose([
+      Validators.required,
+      Validators.pattern(/(.|s)*\S(.|\s)*/)
       ])],
-      modelo: ['modelo1']
-    });
-  }
+    autoria: ['Angular', Validators.compose([
+      Validators.required,
+      Validators.minLength(3)
+    ])],
+    modelo: ['modelo1']
+  });
+}
 ```
 
+## Exibindo mensagens de erro
+
+Podemos acessar as informações de erro do formulário através do errors. 
+Com isso, podemos incluir uma DIV abaixo do input que vai ser renderizada conforme a presença de erros
+
+```
+<input type="textarea" class="input" id="pensamento" formControlName="conteudo"
+       placeholder="Digite o pensamento">
+<div class="mensagem__erro" *ngIf="formulario.get('conteudo')?.errors">
+  Pensamento é obrigatório
+</div>
+```
+
+Para o caso de diferentes tipos de erros de validação, podemos renderizar de acordo com o mesmo
+```
+    <input type="text" class="input" id="autoria" formControlName="autoria"
+           placeholder="Digite a autoria ou fonte">
+    <div class="mensagem__erro" *ngIf="formulario.get('autoria')?.errors?.['required']">
+      Autoria é obrigatória
+    </div>
+    <div class="mensagem__erro" *ngIf="formulario.get('autoria')?.errors?.['minlenght']">
+      Autoria precisa ter no mínimo 3 caracteres
+    </div>
+```
+
+
+Para evitar que os erros de validação ocorram logo ao entrar na tela, podemos utilizar a propriedade touched
+
+```
+<label for="pensamento">Pensamento</label>
+<input type="textarea" class="input" id="pensamento" formControlName="conteudo"
+       placeholder="Digite o pensamento">
+<div class="mensagem__erro" *ngIf="formulario.get('conteudo')?.errors && formulario.get('conteudo')?.touched">
+  Pensamento é obrigatório
+</div>
+
+<label for="autoria">Autoria ou Fonte</label>
+<input type="text" class="input" id="autoria" formControlName="autoria"
+       placeholder="Digite a autoria ou fonte">
+<div class="mensagem__erro" *ngIf="formulario.get('autoria')?.errors?.['required'] && formulario.get('autoria')?.touched">
+  Autoria é obrigatória
+</div>
+<div class="mensagem__erro" *ngIf="formulario.get('autoria')?.errors?.['minlenght'] && formulario.get('autoria')?.touched">
+  Autoria precisa ter no mínimo 3 caracteres
+</div>
+```
