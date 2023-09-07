@@ -580,3 +580,23 @@ E a verificação do formulário pode ser realizada através do valid
 if (this.formulario.valid) {
 ```
 
+## Melhorando validações
+
+Validações mais detalhadas podem ser feitas utilizando o compose. 
+A primeira delas, não permite caracteres em branco, a segunda delas não permite textos menores que 3 caracteres. 
+```
+  ngOnInit(): void {
+    this.formulario = this.formBuilder.group({
+      conteudo: ['Formulário reativo', Validators.compose([
+        Validators.required,
+        Validators.pattern(/(.|s)*\S(.|\s)*/)
+        ])],
+      autoria: ['Angular', Validators.compose([
+        Validators.required,
+        Validators.minLength(3)
+      ])],
+      modelo: ['modelo1']
+    });
+  }
+```
+
