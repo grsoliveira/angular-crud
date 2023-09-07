@@ -547,3 +547,17 @@ ngOnInit(): void {
 
 ## Renderizando o formulário do FormBuilder
 
+Primeiro passo é remover o binding bidirecional que existe com o ngModel, nas telas HTML.
+
+Logo em seguinda, precisamos vincular o formulário html com o formulário da classe
+
+```
+<form [formGroup]="formulario">
+```
+
+Para associar os campos de input, usamos formControlName
+```
+<input type="radio" id="modelo1" value="modelo1" formControlName="modelo">
+```
+Onde o nome apresentado deve ser o mesmo definido na construção do formBuilder.
+
