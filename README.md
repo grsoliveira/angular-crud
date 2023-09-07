@@ -646,3 +646,14 @@ Para evitar que os erros de validação ocorram logo ao entrar na tela, podemos 
   Autoria precisa ter no mínimo 3 caracteres
 </div>
 ```
+
+## Desabilitando botões para formulários inválidos
+
+Para isso podemos utilizar a diretiva disable para desabilitar o botão.
+Como complement, podemos usar a diretiva ngClass para alterar dinamicamente o css do componente. 
+
+```
+<button (click)="criarPensamento()"
+        [disabled]="!formulario.valid"
+        [ngClass]="habilitarBotao()" >Salvar</button>
+```

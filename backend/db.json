@@ -11,6 +11,12 @@
       "conteudo": "Estudando Angular agora vai",
       "autoria": "Dev Alura 2222",
       "modelo": "modelo3"
+    },
+    {
+      "conteudo": "Formulário reativo",
+      "autoria": "Angular",
+      "modelo": "modelo1",
+      "id": 3
     }
   ]
 }
