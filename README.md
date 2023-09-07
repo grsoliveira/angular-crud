@@ -657,3 +657,42 @@ Como complement, podemos usar a diretiva ngClass para alterar dinamicamente o cs
         [disabled]="!formulario.valid"
         [ngClass]="habilitarBotao()" >Salvar</button>
 ```
+
+
+## Paginação
+
+O Json server, utilizado neste projeto, dá suporte à paginação.
+https://github.com/typicode/json-server#paginate
+
+Foi realizada uma modificação no método listar (e nas chamadas ao mesmo) 
+```
+  listar(pagina: number): Observable<Pensamento[]> {
+    const itensPorPagina = 6;
+    return this.http.get<Pensamento[]>(`${this.API}?_page=${pagina}&_limit=${itensPorPagina}`);
+  }
+```
+
+Mas, refatorando para manter o código organizado, podemos utilizar HttpParams
+
+```
+listar(pagina: number): Observable<Pensamento[]> {
+  const itensPorPagina = 6;
+  
+  let params = new HttpParams()
+    .set('_page', pagina)
+    .set('_limit', itensPorPagina);
+  
+  // return this.http.get<Pensamento[]>(`${this.API}?_page=${pagina}&_limit=${itensPorPagina}`);
+  return this.http.get<Pensamento[]>(this.API, { params: params });
+}
+```
+
+No carregamento de mais dados, utilizamos o operador de Spread de JS (...), para que a lista seja acrescida com os elementos da lista recebida. 
+
+```
+carregarMaisPensamentos() {
+  this.service.listar(++this.paginaAtual).subscribe(listaPensamentos => {
+    this.listaPensamentos.push(...listaPensamentos);
+  });
+}
+```
