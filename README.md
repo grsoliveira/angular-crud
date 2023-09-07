@@ -735,3 +735,11 @@ pesquisarPensamentos() {
   });
 }
 ```
+
+
+## Favoritando Pensamentos
+
+Foi incluída uma nova propriedade ao modelo (interface) para que seja armazenada a informação de favorito.
+
+Como o banco de dados (Json server) já possuía dados antes da funcionalidade ser criada, precisamos alterar o arquivo db.json para manter o modelo de dados consistente.
+
