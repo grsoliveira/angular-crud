@@ -743,3 +743,33 @@ Foi incluída uma nova propriedade ao modelo (interface) para que seja armazenad
 
 Como o banco de dados (Json server) já possuía dados antes da funcionalidade ser criada, precisamos alterar o arquivo db.json para manter o modelo de dados consistente.
 
+Foi criado um método adicional no service
+```
+  mudarFavorito(pensamento: Pensamento): Observable<Pensamento> {
+    pensamento.favorito = !pensamento.favorito;
+    return this.editar(pensamento);
+  }
+```
+
+Foi criando um novo botão na tela de listar pensamentos (no compomente de pensamento)
+```
+    <button class="botao-favorito" (click)="atualizarFavoritos()">
+      <img src="../../../../assets/imagens/icone-favorito-{{ mudarIconeFavorito() }}.png" alt="Ícone favorito {{ mudarIconeFavorito() }}">
+    </button>
+```
+
+Demais métodos auxiliares foram criados no pensamento.component.ts
+```
+  mudarIconeFavorito(): string {
+    if (this.pensamento.favorito == false) {
+      return 'inativo';
+    } else {
+      return 'ativo';
+    }
+  }
+
+  atualizarFavoritos() {
+    this.service.mudarFavorito(this.pensamento).subscribe(() => {});
+  }
+```
+
