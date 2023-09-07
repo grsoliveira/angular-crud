@@ -696,3 +696,29 @@ carregarMaisPensamentos() {
   });
 }
 ```
+
+A paginação foi possível com a criação do componente botao-carregar-mais.
+
+
+## Busca / Filtro
+
+Da mesma forma que na paginação, a API também nos oferece a possibilidade de pesquisas.
+https://github.com/typicode/json-server#full-text-search
+
+O método listar (de pensamento.service) foi modificado para receber o campo de filtro/busca.
+
+```
+listar(pagina: number, filtro: string): Observable<Pensamento[]> {
+  const itensPorPagina = 6;
+
+  let params = new HttpParams()
+    .set('_page', pagina)
+    .set('_limit', itensPorPagina);
+
+  if (filtro.trim().length > 2) {
+    params = params.set('q', filtro);
+  }
+
+  return this.http.get<Pensamento[]>(this.API, { params: params });
+}
+```

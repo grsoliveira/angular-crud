@@ -38,7 +38,6 @@ export class EditarPensamentoComponent implements OnInit {
   }
 
   editarPensamento() {
-    console.log(this.formulario);
     if (this.formulario.valid) {
       this.service.editar(this.formulario.value).subscribe(() => {
         this.router.navigate(['/listarPensamento']);
