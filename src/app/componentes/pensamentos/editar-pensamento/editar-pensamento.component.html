@@ -4,14 +4,14 @@
   </header>
   <form [formGroup]="formulario">
     <label for="pensamento">Pensamento</label>
-    <input type="textarea" class="input" id="pensamento" name="pensamento"
+    <input type="textarea" class="input" id="pensamento"
            placeholder="Digite o pensamento" formControlName="conteudo">
     <div class="mensagem__erro" *ngIf="formulario.get('conteudo')?.errors && formulario.get('conteudo')?.touched">
       Pensamento é obrigatório
     </div>
 
     <label for="autoria">Autoria ou Fonte</label>
-    <input type="text" class="input" id="autoria" name="autoria"
+    <input type="text" class="input" id="autoria"
            placeholder="Digite a autoria ou fonte" formControlName="autoria">
     <div class="mensagem__erro" *ngIf="formulario.get('autoria')?.errors?.['required'] && formulario.get('autoria')?.touched">
       Autoria é obrigatória
@@ -24,7 +24,7 @@
     <div class="container-radio">
       <div class="radio-modelo">
         <label for="modelo1">
-          <input type="radio" id="modelo1" value="modelo1" name="modelo-card" formControlName="modelo">
+          <input type="radio" id="modelo1" value="modelo1" formControlName="modelo">
           <div class="custom-radio">
             <span></span>
           </div>
@@ -40,7 +40,7 @@
 
       <div class="radio-modelo">
         <label for="modelo2">
-          <input type="radio" id="modelo2" value="modelo2" name="modelo-card" formControlName="modelo">
+          <input type="radio" id="modelo2" value="modelo2" formControlName="modelo">
           <div class="custom-radio">
             <span></span>
           </div>
@@ -56,7 +56,7 @@
 
       <div class="radio-modelo">
         <label for="modelo3">
-          <input type="radio" id="modelo3" value="modelo3" name="modelo-card" formControlName="modelo">
+          <input type="radio" id="modelo3" value="modelo3" formControlName="modelo">
           <div class="custom-radio">
             <span></span>
           </div>

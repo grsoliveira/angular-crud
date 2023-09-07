@@ -23,6 +23,7 @@ export class EditarPensamentoComponent implements OnInit {
     this.service.buscarPorId(parseInt(id!)).subscribe(pensamento => {
 
       this.formulario = this.formBuilder.group({
+        id: [pensamento.id],
         conteudo: [pensamento.conteudo, Validators.compose([
           Validators.required,
           Validators.pattern(/(.|s)*\S(.|\s)*/)
@@ -37,9 +38,12 @@ export class EditarPensamentoComponent implements OnInit {
   }
 
   editarPensamento() {
-    this.service.editar(this.formulario.value).subscribe(() => {
-      this.router.navigate(['/listarPensamento']);
-    })
+    console.log(this.formulario);
+    if (this.formulario.valid) {
+      this.service.editar(this.formulario.value).subscribe(() => {
+        this.router.navigate(['/listarPensamento']);
+      })
+    }
   }
 
   cancelar() {
