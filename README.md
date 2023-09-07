@@ -561,3 +561,22 @@ Para associar os campos de input, usamos formControlName
 ```
 Onde o nome apresentado deve ser o mesmo definido na construção do formBuilder.
 
+
+## Incluindo validações
+
+As validações podem ser incluídas utilizando Validators
+```
+ngOnInit(): void {
+    this.formulario = this.formBuilder.group({
+      conteudo: ['Formulário reativo', [Validators.required]],
+      autoria: ['Angular', [Validators.required]],
+      modelo: ['modelo1']
+    });
+  }
+```
+
+E a verificação do formulário pode ser realizada através do valid
+```
+if (this.formulario.valid) {
+```
+
