@@ -722,3 +722,16 @@ listar(pagina: number, filtro: string): Observable<Pensamento[]> {
   return this.http.get<Pensamento[]>(this.API, { params: params });
 }
 ```
+
+
+Foi criado o método pesquisarPensamentos para realizar a busca quando algum valor for digitado no campo de busca
+
+```
+pesquisarPensamentos() {
+  this.paginaAtual = 1;
+  this.haMaisPensamentos = true;
+  this.service.listar(this.paginaAtual, this.filtro).subscribe(listaPensamentos => {
+    this.listaPensamentos = listaPensamentos;
+  });
+}
+```
