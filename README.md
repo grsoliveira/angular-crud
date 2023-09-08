@@ -773,3 +773,48 @@ Demais métodos auxiliares foram criados no pensamento.component.ts
   }
 ```
 
+## Atualizando lista após interação
+
+O método listar do service foi alterado para receber a flag de favorito
+
+```
+  listar(pagina: number, filtro: string, favoritos: boolean): Observable<Pensamento[]> {
+    const itensPorPagina = 6;
+
+    let params = new HttpParams()
+      .set('_page', pagina)
+      .set('_limit', itensPorPagina);
+
+    if (filtro.trim().length > 2) {
+      params = params.set('q', filtro);
+    }
+    if (favoritos) {
+      params = params.set('favorito', true);
+    }
+
+    return this.http.get<Pensamento[]>(this.API, { params: params });
+  }
+```
+
+O pensamento.component recebeu uma variável @Input e uma nova lógica para atualizar favoritos.
+
+```
+@Input() listaFavoritos: Pensamento[] = [];
+
+  atualizarFavoritos() {
+    this.service.mudarFavorito(this.pensamento).subscribe(() => {
+      this.listaFavoritos.splice(this.listaFavoritos.indexOf(this.pensamento), 1);
+    });
+  }
+```
+
+E por fim, esse input é alimentado pelo componente pai, com uma lista obtido utilizando o novo método de listsar do service.
+
+```
+<app-pensamento
+  [pensamento]="pensamento"
+  [listaFavoritos]="listaFavoritos">
+</app-pensamento>
+```
+
+

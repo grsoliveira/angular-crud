@@ -40,7 +40,7 @@
       "autoria": "Angular",
       "modelo": "modelo1",
       "id": 6,
-      "favorito": false
+      "favorito": true
     },
     {
       "conteudo": "444",
