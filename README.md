@@ -817,4 +817,22 @@ E por fim, esse input é alimentado pelo componente pai, com uma lista obtido ut
 </app-pensamento>
 ```
 
+## Recarregando componente
 
+O botão Meu Mural retorna para a tela inicial da aplicação. 
+Utilizar a estratégia location.reload() recarrega toda a aplicação e não apenas o componente. 
+
+Com isso, devemos usar a abordagem com Router.
+routeReuseStrategy.shouldReuseRoute deve ser setado para false para que o Angular não mantenha o componente inalterado (pois desejamos recarregá-lo)
+onSameUrlNavigation deve ser definido para reload para que o componente recarrege estando na mesma url.
+
+```
+  recarregarComponente() {
+    this.favoritos = false;
+    this.paginaAtual = 1;
+
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([this.router.url]);
+  }
+```
